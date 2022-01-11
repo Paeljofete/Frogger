@@ -68,11 +68,6 @@ movimientoAbajo = [pygame.image.load('imagenes/rana_abajo/rana_icon.png'),
                    pygame.image.load('imagenes/rana_abajo/2salto_abajo.png'),
                    pygame.image.load('imagenes/rana_abajo/3salto_abajo.png')]
 
-# Gestión velocidad movimiento.
-velocidad1 = 10
-velocidad2 = 6
-velocidad3 = -6
-
 # Coordenadas de cada carril de la carretera.
 carril1Loc = 456
 carril2Loc = 396
@@ -110,6 +105,11 @@ class PanelJuego():
         longitudMovimiento = 60
         # Contador para ir quitando segundos al tiempo
         retroceso = 480
+
+        # Gestión velocidad movimiento.
+        velocidad1 = 10
+        velocidad2 = 6
+        velocidad3 = -5
 
         # Control de vidas y de puntos.
         disponibles = 5
@@ -364,6 +364,9 @@ class PanelJuego():
             if coordAlto == 36:
                 puntos += 500
                 ranas.append(coordAncho)
+                velocidad1 += 2
+                velocidad2 += 2
+                velocidad3 += -2
                 disponibles -= 1
                 coordAlto = 576
                 sonidoVida.play()
@@ -466,13 +469,13 @@ class PanelJuego():
 
         if disponibles == 0:
             sonidoGanador.play
-            salvadas = inicios.render('Todas las ranas salvadas', True, VERDEFROG)
-            ganador = inicios.render('Enhorabuena', True, ROJO)
+            salvadas = recomenzar.render('Todas las ranas salvadas', True, BLANCO)
+            ganador = inicios.render('Enhorabuena', True, VERDEFROG)
             puntuacion = titulos.render('PUNTOS  ' + str(puntos), True, ROJO)
             comenzar = recomenzar.render('pulsa espacio para volver a comenzar', True, VERDEFROG)
             self.marco.blit(ganador, (ancho//3, alto//3))
             self.marco.blit(puntuacion, (ancho//3, 350))
-            self.marco.blit(salvadas, (ancho//3, 100))
+            self.marco.blit(salvadas, (40, 100))
             self.marco.blit(comenzar, (25, 576))
         elif disponibles < 5:
             ganador = inicios.render('Game Over', True, ROJO)
