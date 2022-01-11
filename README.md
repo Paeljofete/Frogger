@@ -1,2 +1,2 @@
 # Frogger
-Primer juego programado en Python con pygame
+Primer juego programado en Python con PyGame
